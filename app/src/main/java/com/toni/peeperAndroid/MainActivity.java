@@ -1,4 +1,4 @@
-package com.toni.peeper01Android;
+package com.toni.peeperandroid;
 
 import androidx.appcompat.app.AppCompatActivity;
 
