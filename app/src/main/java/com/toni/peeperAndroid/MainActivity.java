@@ -7,7 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
     private View btn;
 
@@ -18,12 +18,18 @@ public class MainActivity extends AppCompatActivity {
 
         btn = findViewById(R.id.buttonMain);
 
-        btn.setOnClickListener(new View.OnClickListener() {
+        btn.setOnClickListener(this);
+        /*btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Toast.makeText(MainActivity.this, "Pulsaste el botón!", Toast.LENGTH_SHORT).show();
             }
-        });
+        });*/
 
+    }
+
+    @Override
+    public void onClick(View view) {
+        Toast.makeText(MainActivity.this, "Pulsaste el botón!", Toast.LENGTH_SHORT).show();
     }
 }
