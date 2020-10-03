@@ -27,7 +27,9 @@
         android:layout_marginTop="70dp"
         android:text="Button"
         app:layout_constraintStart_toStartOf="@+id/textView"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        android:background="#0da"
+        android:onClick="miMetodo"/>
 
     <Switch
         android:id="@+id/switch1"
