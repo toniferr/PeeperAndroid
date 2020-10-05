@@ -12,7 +12,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:background="#000"
+        android:background="#E91E63"
         android:text="Juega"
         android:textColor="#FFF"
         app:layout_constraintEnd_toEndOf="parent"

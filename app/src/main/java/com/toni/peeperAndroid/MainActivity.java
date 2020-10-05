@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity{
             public void onClick(View view) {
                 //Acceder al segundo activity y mandar un string
                 Intent intent = new Intent(MainActivity.this, SecondActivity.class);
-                intent.putExtra("saludo2", SALUDO);
+                intent.putExtra("saludo", SALUDO);
                 startActivity(intent);
             }
         });
