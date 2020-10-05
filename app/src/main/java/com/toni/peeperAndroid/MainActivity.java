@@ -2,14 +2,17 @@ package com.toni.peeperandroid;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener{
+public class MainActivity extends AppCompatActivity{
 
     private View btn;
+
+    private final String SALUDO = "Hi there!";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,18 +21,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         btn = findViewById(R.id.buttonMain);
 
-        btn.setOnClickListener(this);
-        /*btn.setOnClickListener(new View.OnClickListener() {
+        btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(MainActivity.this, "Pulsaste el botón!", Toast.LENGTH_SHORT).show();
+                //Acceder al segundo activity y mandar un string
+                Intent intent = new Intent(MainActivity.this, SecondActivity.class);
+                intent.putExtra("saludo2", SALUDO);
+                startActivity(intent);
             }
-        });*/
+        });
 
-    }
-
-    @Override
-    public void onClick(View view) {
-        Toast.makeText(MainActivity.this, "Pulsaste el botón!", Toast.LENGTH_SHORT).show();
     }
 }
