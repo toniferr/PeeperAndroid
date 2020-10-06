@@ -9,6 +9,7 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -42,7 +43,28 @@ public class ThirdActivity extends AppCompatActivity {
                 if (phoneNumber != null && !phoneNumber.isEmpty()){
                     //comprobar version actual de android que estamos corriendo es mayor a la version M
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
-                        requestPermissions(new String[]{Manifest.permission.CALL_PHONE}, PHONE_CALL_CODE); //se le comprueba el permiso CALL_PHONE, puede haber mas
+                        //comprobar si ha aceptado, no ha aceptado o nunca se le ha preguntado
+                        if (checkPermission(Manifest.permission.CALL_PHONE)){
+                            //Ha aceptado
+                            Intent i = new Intent(Intent.ACTION_CALL, Uri.parse("tel:"+phoneNumber)); //se puede introducir con metodo addData etc
+                            startActivity(i);
+                        } else {
+                            //ha denegado o no se le ha preguntado
+                            if (shouldShowRequestPermissionRationale(Manifest.permission.CALL_PHONE)){
+                                //ha denegado
+                                Toast.makeText(ThirdActivity.this, "Habilita el permiso, por favor", Toast.LENGTH_LONG).show();
+                                Intent i = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+                                i.addCategory(Intent.CATEGORY_DEFAULT);
+                                i.setData(Uri.parse("package:"+getPackageName()));
+                                //FLAGS para al ir atrás vuelve a la aplicación
+                                i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                i.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+                                i.addFlags(Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
+                                startActivity(i);
+                            } else {
+                                requestPermissions(new String[]{Manifest.permission.CALL_PHONE}, PHONE_CALL_CODE); //se le comprueba el permiso CALL_PHONE, puede haber mas
+                            }
+                        }
                     } else {
                         OlderVersion(phoneNumber);
                     }
