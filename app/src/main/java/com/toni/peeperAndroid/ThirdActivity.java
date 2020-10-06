@@ -22,7 +22,7 @@ public class ThirdActivity extends AppCompatActivity {
     private ImageButton imageBtnWeb;
     private ImageButton imageBtnCamera;
 
-    private final int PHONE_CALL_CODE = 100;
+    private final int PHONE_CALL_CODE = 100; //codigo que identifica la comprobacion de permiso de telefono
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,19 +39,22 @@ public class ThirdActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 String phoneNumber = editTextPhone.getText().toString();
-                if (phoneNumber != null){
-                    //comprobar version actual de android que estamos corriendo
+                if (phoneNumber != null && !phoneNumber.isEmpty()){
+                    //comprobar version actual de android que estamos corriendo es mayor a la version M
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
-                        requestPermissions(new String[]{Manifest.permission.CALL_PHONE}, PHONE_CALL_CODE);
+                        requestPermissions(new String[]{Manifest.permission.CALL_PHONE}, PHONE_CALL_CODE); //se le comprueba el permiso CALL_PHONE, puede haber mas
                     } else {
                         OlderVersion(phoneNumber);
                     }
+                } else {
+                    Toast.makeText(ThirdActivity.this, "Introduce un número de teléfono", Toast.LENGTH_LONG).show();
                 }
             }
 
+            //método específico, se puede usar para permiso de teléfono y en ámbito local
             private void OlderVersion (String phoneNumber){
-                Intent intentCall = new Intent(Intent.ACTION_CALL, Uri.parse("tel:"+phoneNumber));
                 if (checkPermission(Manifest.permission.CALL_PHONE)) {
+                    Intent intentCall = new Intent(Intent.ACTION_CALL, Uri.parse("tel:"+phoneNumber));
                     startActivity(intentCall);
                 } else {
                     Toast.makeText(ThirdActivity.this, "Acceso rechazado", Toast.LENGTH_LONG).show();
@@ -60,13 +63,15 @@ public class ThirdActivity extends AppCompatActivity {
         });
     }
 
+    //se llama este método en cada llamada de requestPermissions(new String[]{Manifest.permission.CALL_PHONE}, PHONE_CALL_CODE)
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         //Estamos en el caso del telefono
         switch (requestCode){
             case PHONE_CALL_CODE :
                 String permission = permissions[0];
-                int result = grantResults[0];
+                int result = grantResults[0]; //recoge el resultado del usuario si permite o no el permiso del telefono
+
                 if (permission.equals(Manifest.permission.CALL_PHONE)){
                     //comprobar si ha sido aceptado o denegado la peticion de permiso
                     if (result == PackageManager.PERMISSION_GRANTED){
@@ -86,6 +91,8 @@ public class ThirdActivity extends AppCompatActivity {
         }
     }
 
+
+    //método genérico, se puede usar con permisos de cualquier tipo, no solo de teléfono
     private boolean checkPermission(String permission){
         int result = this.checkCallingOrSelfPermission(permission);
         return result == PackageManager.PERMISSION_GRANTED;
