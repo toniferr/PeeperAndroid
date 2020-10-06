@@ -1,9 +1,11 @@
 package com.toni.peeperandroid;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
@@ -24,6 +26,7 @@ public class ThirdActivity extends AppCompatActivity {
     private ImageButton imageBtnCamera;
 
     private final int PHONE_CALL_CODE = 100; //codigo que identifica la comprobacion de permiso de telefono
+    private final int CAMERA_FOTO_CODE = 150;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -126,6 +129,37 @@ public class ThirdActivity extends AppCompatActivity {
                 }
             }
         });
+
+        //BOTON PARA CAMARA
+        imageBtnCamera.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //abrir camara
+                Intent intentCamara = new Intent("android.media.action.IMAGE_CAPTURE");
+                //startActivity(intentCamara);
+                startActivityForResult(intentCamara, CAMERA_FOTO_CODE);
+            }
+        });
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+
+        switch (requestCode) {
+            case CAMERA_FOTO_CODE:
+                if (resultCode == Activity.RESULT_OK){
+                    //si la foto fue hecha y se le dio a OK
+                    String result = data.toUri(0);
+                    Toast.makeText(this, "Result:"+result,Toast.LENGTH_LONG).show();
+                } else {
+                    //si le das para atrás y no haces la foto
+                    Toast.makeText(this, "Hubo un error al hacer la foto",Toast.LENGTH_LONG).show();
+                }
+                break;
+            default:
+                super.onActivityResult(requestCode, resultCode, data);
+                break;
+        }
     }
 
     //se llama este método en cada llamada de requestPermissions(new String[]{Manifest.permission.CALL_PHONE}, PHONE_CALL_CODE)
