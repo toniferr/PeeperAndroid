@@ -100,7 +100,7 @@ public class ThirdActivity extends AppCompatActivity {
                     Intent intentContact = new Intent(Intent.ACTION_VIEW, Uri.parse("content://contacts/people"));
 
                     //Intent para mail rapido
-                    String mail = "ferreirocouto@gmail.com";
+                    String mail = "ferreirocouto@gmail.com"; //la persona que lo manda
                     Intent intentCorreo = new Intent(Intent.ACTION_SENDTO, Uri.parse("mailto:"+mail));
 
                     //Intent para mail completo
@@ -109,6 +109,15 @@ public class ThirdActivity extends AppCompatActivity {
                     intentFullCorreo.putExtra(Intent.EXTRA_SUBJECT, "Title");
                     intentFullCorreo.putExtra(Intent.EXTRA_TEXT, "Hi there! Im Toni (...)");
                     intentFullCorreo.putExtra(Intent.EXTRA_EMAIL, new String[]{"fernandolelcatolico@yahoo.es", "ferreirocouto@gmail.com"});
+                    //uso de gmail
+                    intentFullCorreo.setClassName("com.google.android.gm", "com.google.android.gm.ComposeActivityGmail");
+                    //para elegir el cliente de correo:
+                    //startActivity(Intent.createChooser(intentFullCorreo, "elige cliente de correo");
+                    //con
+                    //intentFullCorreo.setType("message/rfc822");
+                    //o
+                    //Intent intentFullCorreo = new Intent(Intent.ACTION_SEND, Uri.parse("mail"));
+                    //intentFullCorreo.setType("plain/text");
 
                     //telefono 2 sin permisos requeridos, nos lo marca y solo hace falta pulsar para llamar
                     Intent intentTel = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:+6000000000") );
