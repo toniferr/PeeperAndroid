@@ -100,7 +100,7 @@ public class ThirdActivity extends AppCompatActivity {
                     Intent intentContact = new Intent(Intent.ACTION_VIEW, Uri.parse("content://contacts/people"));
 
                     //Intent para mail rapido
-                    String mail = "ferreirocouto";
+                    String mail = "ferreirocouto@gmail.com";
                     Intent intentCorreo = new Intent(Intent.ACTION_SENDTO, Uri.parse("mailto:"+mail));
 
                     //Intent para mail completo
