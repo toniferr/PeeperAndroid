@@ -36,6 +36,7 @@ public class ThirdActivity extends AppCompatActivity {
         imageBtnWeb = (ImageButton) findViewById(R.id.imageBtnWeb);
         imageBtnCamera = (ImageButton) findViewById(R.id.imageBtnCamera);
 
+        //BOTON PARA EL TELEFONO
         imageBtnPhone.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -80,6 +81,22 @@ public class ThirdActivity extends AppCompatActivity {
                     startActivity(intentCall);
                 } else {
                     Toast.makeText(ThirdActivity.this, "Acceso rechazado", Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+
+
+        //BOTON PARA EL NAVEGADOR WEB
+        imageBtnWeb.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String url = editTextWeb.getText().toString();
+                if (url != null && !url.isEmpty()){
+                    Intent intentWeb = new Intent();
+                    intentWeb.setAction(Intent.ACTION_VIEW);
+                    intentWeb.setData(Uri.parse("http://"+url));
+
+                    startActivity(intentWeb);
                 }
             }
         });
