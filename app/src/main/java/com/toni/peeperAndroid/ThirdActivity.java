@@ -96,7 +96,24 @@ public class ThirdActivity extends AppCompatActivity {
                     intentWeb.setAction(Intent.ACTION_VIEW);
                     intentWeb.setData(Uri.parse("http://"+url));
 
-                    startActivity(intentWeb);
+                    //Intent para contacto
+                    Intent intentContact = new Intent(Intent.ACTION_VIEW, Uri.parse("content://contacts/people"));
+
+                    //Intent para mail rapido
+                    String mail = "ferreirocouto";
+                    Intent intentCorreo = new Intent(Intent.ACTION_SENDTO, Uri.parse("mailto:"+mail));
+
+                    //Intent para mail completo
+                    Intent intentFullCorreo = new Intent(Intent.ACTION_VIEW, Uri.parse("mail"));
+                    intentFullCorreo.setType("plain/text");
+                    intentFullCorreo.putExtra(Intent.EXTRA_SUBJECT, "Title");
+                    intentFullCorreo.putExtra(Intent.EXTRA_TEXT, "Hi there! Im Toni (...)");
+                    intentFullCorreo.putExtra(Intent.EXTRA_EMAIL, new String[]{"fernandolelcatolico@yahoo.es", "ferreirocouto@gmail.com"});
+
+                    //telefono 2 sin permisos requeridos, nos lo marca y solo hace falta pulsar para llamar
+                    Intent intentTel = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:+6000000000") );
+
+                    startActivity(intentTel);
                 }
             }
         });
