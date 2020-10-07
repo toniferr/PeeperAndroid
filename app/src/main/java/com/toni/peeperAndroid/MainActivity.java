@@ -5,8 +5,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -54,10 +56,10 @@ public class MainActivity extends AppCompatActivity{
         names.add("Santiago");
 
         //adaptador, la forma visual en que mostraremos los datos
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, names);
+        //ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, names);
 
         //enlazar adaptador con listview
-        listView.setAdapter(adapter);
+        //listView.setAdapter(adapter);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -65,6 +67,11 @@ public class MainActivity extends AppCompatActivity{
                 Toast.makeText(MainActivity.this, "clikeado: "+names.get(i), Toast.LENGTH_LONG).show();
             }
         });
+
+        //enlazamos con nuestro adaptador personalizado
+        MyAdapter myAdapter = new MyAdapter(this, R.layout.list_item, names);
+
+        listView.setAdapter(myAdapter);
 
     }
 }
