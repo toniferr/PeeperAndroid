@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
@@ -20,6 +21,8 @@ public class MainActivity extends AppCompatActivity{
     private ListView listView;
 
     private final String SALUDO = "Hi there!";
+
+    private List<String> names = new ArrayList<String>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +48,6 @@ public class MainActivity extends AppCompatActivity{
         listView = (ListView) findViewById(R.id.listView);
 
         //datos a mostrar
-        List<String> names = new ArrayList<String>();
         names.add("Toni");
         names.add("Pepe");
         names.add("Manolo");
@@ -56,6 +58,13 @@ public class MainActivity extends AppCompatActivity{
 
         //enlazar adaptador con listview
         listView.setAdapter(adapter);
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Toast.makeText(MainActivity.this, "clikeado: "+names.get(i), Toast.LENGTH_LONG).show();
+            }
+        });
 
     }
 }
