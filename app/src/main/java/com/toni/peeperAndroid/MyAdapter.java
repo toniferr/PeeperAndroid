@@ -7,11 +7,9 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
-
 import java.util.List;
 
-class MyAdapter extends BaseAdapter {
+public class MyAdapter extends BaseAdapter {
 
     private Context context;
     private int layout;
@@ -39,24 +37,38 @@ class MyAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View view, ViewGroup viewGroup) {
+    public View getView(int position, View convertView, ViewGroup viewGroup) {
 
-        //copiamos la vista
-        View v = view;
+        // View Holder Pattern
+        ViewHolder holder;
 
-        //inflamos la vista que nos ha llegado en nuestro layout
-        LayoutInflater layoutInflater = LayoutInflater.from(this.context);
-        v = layoutInflater.inflate(R.layout.list_item, null);
+        if (convertView == null) {
+            //inflamos la vista que nos ha llegado en nuestro layout
+            LayoutInflater layoutInflater = LayoutInflater.from(this.context);
+            convertView = layoutInflater.inflate(R.layout.list_item, null);
+
+            holder = new ViewHolder();
+            //Referenciamos el elemento a modificar y lo rellenamos
+            holder.nameTextView = (TextView) convertView.findViewById(R.id.textView);
+            convertView.setTag(holder); //se podria añadir id
+
+        } else {
+            holder = (ViewHolder) convertView.getTag();
+        }
 
         //cogemos valor actual dependiente de la posicion
         String currentName = names.get(position);
         //currentName = (String) getItem(position); se puede usar asi
 
         //Referenciamos el elemento a modificar y lo rellenamos
-        TextView textView = (TextView) v.findViewById(R.id.textView);
-        textView.setText(currentName);
+        holder.nameTextView.setText(currentName);
 
         //devolvemos la vista
-        return v;
+        return convertView;
+    }
+
+    static class ViewHolder {
+        private TextView nameTextView;
+
     }
 }

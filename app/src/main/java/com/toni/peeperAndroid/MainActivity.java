@@ -2,8 +2,10 @@ package com.toni.peeperandroid;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -11,6 +13,7 @@ import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -54,6 +57,17 @@ public class MainActivity extends AppCompatActivity{
         names.add("Pepe");
         names.add("Manolo");
         names.add("Santiago");
+        names.add("Pablo");
+        names.add("Juan");
+        names.add("Jose");
+        names.add("Ramon");
+        names.add("David");
+        names.add("Diego");
+        names.add("Alvaro");
+        names.add("Jorge");
+        names.add("Lucas");
+        names.add("Gonzalo");
+        names.add("Martin");
 
         //adaptador, la forma visual en que mostraremos los datos
         //ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, names);
@@ -75,3 +89,4 @@ public class MainActivity extends AppCompatActivity{
 
     }
 }
+
