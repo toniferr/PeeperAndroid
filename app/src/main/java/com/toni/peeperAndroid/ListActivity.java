@@ -2,24 +2,17 @@ package com.toni.peeperandroid;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.BaseAdapter;
-import android.widget.Button;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity{
+public class ListActivity extends AppCompatActivity{
 
     private View btn;
 
@@ -44,7 +37,7 @@ public class MainActivity extends AppCompatActivity{
             @Override
             public void onClick(View view) {
                 //Acceder al segundo activity y mandar un string
-                Intent intent = new Intent(MainActivity.this, SecondActivity.class);
+                Intent intent = new Intent(ListActivity.this, SecondActivity.class);
                 intent.putExtra("saludo", SALUDO);
                 startActivity(intent);
             }
@@ -78,7 +71,7 @@ public class MainActivity extends AppCompatActivity{
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Toast.makeText(MainActivity.this, "clikeado: "+names.get(i), Toast.LENGTH_LONG).show();
+                Toast.makeText(ListActivity.this, "clikeado: "+names.get(i), Toast.LENGTH_LONG).show();
             }
         });
 
